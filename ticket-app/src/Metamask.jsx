@@ -7,6 +7,7 @@ let signer;
         alert("MetaMask not installed; using read-only defaults");
         provider = ethers.getDefaultProvider();
       } else {
+         await window.ethereum.request({ method: 'eth_requestAccounts' });
         provider = new ethers.providers.Web3Provider(window.ethereum);
          const network = await provider.getNetwork();
         const requiredNetworkId = 8081; 
