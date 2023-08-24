@@ -9,6 +9,13 @@ let signer;
       } else {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
         provider = new ethers.providers.Web3Provider(window.ethereum);
+         const network = await provider.getNetwork();
+        const requiredNetworkId = 8081; 
+
+          if (network.chainId !== requiredNetworkId) {
+            alert(`Please connect to the required network (${requiredNetworkId})`);
+            return null;
+          }
         signer = await provider.getSigner();
         return signer;
       }
